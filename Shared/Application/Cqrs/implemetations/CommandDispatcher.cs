@@ -75,8 +75,7 @@ namespace Shared.Application.Cqrs.implemetations
             while (newEvents.Count > 0)
             {
                 if (--loops <= 0)
-                    throw new DomainException(
-                        "Trop d'itérations de publication d'events — cascade infinie probable.");
+                    throw new MaxDrainDomainEventException();
 
                 await domainEvents.PublishAsync(newEvents, ct); 
                 allProcessed.AddRange(newEvents);
