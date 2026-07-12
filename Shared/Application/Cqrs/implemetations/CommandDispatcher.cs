@@ -1,9 +1,13 @@
-﻿using Shared.Application.Messaging;
+﻿using Shared.Application.Cqrs.abstracts;
+using Shared.Application.Cqrs.interfaces;
+using Shared.Application.Messaging;
+using Shared.Application.providers;
 using Shared.Domain.Event;
+using Shared.Domain.Exceptions;
 using System.Collections.Concurrent;
 
 
-namespace Shared.Application.Cqrs
+namespace Shared.Application.Cqrs.implemetations
 {
     public sealed class CommandDispatcher(
         IServiceResolver resolver,
@@ -71,7 +75,7 @@ namespace Shared.Application.Cqrs
             while (newEvents.Count > 0)
             {
                 if (--loops <= 0)
-                    throw new InvalidOperationException(
+                    throw new DomainException(
                         "Trop d'itérations de publication d'events — cascade infinie probable.");
 
                 await domainEvents.PublishAsync(newEvents, ct); 

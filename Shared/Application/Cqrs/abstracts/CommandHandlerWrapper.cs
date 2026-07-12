@@ -1,15 +1,9 @@
-﻿using Shared.Application.Messaging;
+﻿using Shared.Application.Cqrs.interfaces;
+using Shared.Application.Messaging;
+using Shared.Application.providers;
 
-
-namespace Shared.Application.Cqrs
+namespace Shared.Application.Cqrs.abstracts
 {
-
-    public interface ICommand<TResponse>;
-    public interface ICommandHandler<TCommand, TResponse> where TCommand : ICommand<TResponse>
-    {
-        Task<Result<TResponse>> HandleAsync(TCommand command, CancellationToken ct = default);
-    }
-
     public abstract class CommandHandlerWrapper<TResponse>
     {
         public abstract Task<Result<TResponse>> HandleAsync(
@@ -27,8 +21,4 @@ namespace Shared.Application.Cqrs
             return await handler.HandleAsync((TCommand)command, ct);
         }
     }
-
-
-
-
 }

@@ -1,5 +1,11 @@
 <Solution>
-  <Project Path="Ordering/Ordering.csproj" />
+  <Folder Name="/Ordering/">
+    <Project Path="Ordering.Core/Ordering.Core.csproj" Id="c78c8834-de72-4703-ab73-d55539623aa3" />
+    <Project Path="Ordering.Tests/Ordering.Tests.csproj" Id="6833774a-0bb9-48ea-92b4-e87795c57a58" />
+  </Folder>
+  <Folder Name="/Shared.Kernel/">
+    <Project Path="Shared.Test/Shared.Test.csproj" Id="122227bc-3160-4892-8dea-eb610cb2e576" />
+    <Project Path="Shared/Shared.csproj" />
+  </Folder>
   <Project Path="PaymentsPlatform/PaymentsPlatform.csproj" />
-  <Project Path="Shared/Shared.csproj" />
 </Solution>

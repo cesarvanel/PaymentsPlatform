@@ -1,7 +1,7 @@
 ﻿using Shared.Domain.Event;
 
 
-namespace Shared.Application.Cqrs
+namespace Shared.Application.Cqrs.interfaces
 {
     public interface IDomainEventDispatcher
     {

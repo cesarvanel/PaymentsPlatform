@@ -1,9 +1,7 @@
 ﻿using Shared.Application.Messaging;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Shared.Application.Cqrs
+
+namespace Shared.Application.Cqrs.interfaces
 {
     public interface ICommandDispatcher
     {

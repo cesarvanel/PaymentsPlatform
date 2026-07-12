@@ -1,8 +1,8 @@
-﻿using Shared.Domain.Event;
-using System.Collections;
+﻿using Shared.Application.Cqrs.interfaces;
+using Shared.Domain.Event;
 
 
-namespace Shared.Application.Cqrs
+namespace Shared.Application.Cqrs.implemetations
 {
     public sealed class DomainEventDispatcher(IEnumerable<IEventSubscriber> subscribers) : IDomainEventDispatcher
     {
