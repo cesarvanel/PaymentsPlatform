@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/Billing/">
+    <Project Path="Billing.Core/Billing.Core.csproj" Id="3e2cab05-4e27-4410-81d8-1ba60163b5d0" />
+    <Project Path="Billing.Tests/Billing.Tests.csproj" Id="0df8c341-e1d2-426e-a5ad-b722143783a9" />
+  </Folder>
   <Folder Name="/Ordering/">
     <Project Path="Ordering.Core/Ordering.Core.csproj" Id="c78c8834-de72-4703-ab73-d55539623aa3" />
     <Project Path="Ordering.Tests/Ordering.Tests.csproj" Id="6833774a-0bb9-48ea-92b4-e87795c57a58" />

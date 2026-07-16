@@ -1,4 +1,4 @@
-﻿using Ordering.Core.Application.Ports.In;
+﻿using Ordering.Core.Application.Ports.Out;
 using Shared.Application.Cqrs.interfaces;
 using Shared.Application.Messaging;
 

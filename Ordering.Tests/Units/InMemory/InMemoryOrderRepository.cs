@@ -1,4 +1,4 @@
-﻿using Ordering.Core.Application.Ports.In;
+﻿using Ordering.Core.Application.Ports.Out;
 using Ordering.Core.Domain;
 
 
@@ -7,7 +7,7 @@ namespace Ordering.Tests.Units.InMemory
     public class InMemoryOrderRepository:IOrderRepository
     {
 
-        private readonly Dictionary<Guid, Order> _store = new();
+        private readonly Dictionary<Guid, Order> _store = [];
 
         public Task<Order?> GetByIdAsync(Guid id, CancellationToken ct = default)
         {

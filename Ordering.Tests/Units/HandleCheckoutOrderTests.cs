@@ -5,7 +5,7 @@ using Ordering.Tests.Units.InMemory;
 
 namespace Ordering.Tests.Units
 {
-    public class CheckoutOrderHandlerTests
+    public class HandleCheckoutOrderTests
     {
 
         [Fact]
