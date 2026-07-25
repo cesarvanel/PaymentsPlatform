@@ -1,9 +1,10 @@
-﻿using Shared.Application.Cqrs.interfaces;
-using Shared.Application.Messaging;
-using Ordering.Core.Domain.Exceptions;
+﻿using Ordering.Core.Application.Ports.Out;
 using Ordering.Core.Domain;
-using Ordering.Core.Domain.Vo;
-using Ordering.Core.Application.Ports.Out;
+using Ordering.Core.Domain.Exceptions;
+using Shared.Application.Cqrs.interfaces;
+using Shared.Application.Messaging;
+using Shared.Domain.Exceptions;
+using Shared.Domain.Vo;
 
 namespace Ordering.Core.Application.Commands.CreateOrder
 {
@@ -45,7 +46,7 @@ namespace Ordering.Core.Application.Commands.CreateOrder
             {
 
                 order.Validate();
-                await orderRepository.SaveAsync(order);
+                await orderRepository.SaveAsync(order, ct);   
             }
             catch (InvalidOrderException ex)
             {

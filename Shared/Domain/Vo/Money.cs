@@ -1,6 +1,7 @@
-﻿using Ordering.Core.Domain.Exceptions;
+﻿
+using Shared.Domain.Exceptions;
 
-namespace Ordering.Core.Domain.Vo
+namespace Shared.Domain.Vo
 {
     public class Money
     {
@@ -23,7 +24,7 @@ namespace Ordering.Core.Domain.Vo
             return new Money(Amount + other.Amount, Currency);
         }
 
-        public Money Substract(Money other)
+        public Money Subtract(Money other)
         {
             EnsureSameCurrency(other);
             return new Money(Amount - other.Amount, Currency);

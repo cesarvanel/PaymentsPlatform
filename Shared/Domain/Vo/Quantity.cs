@@ -1,5 +1,4 @@
-﻿
-namespace Ordering.Core.Domain.Vo
+﻿namespace Shared.Domain.Vo
 {
     public class Quantity
     {

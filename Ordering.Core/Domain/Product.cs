@@ -1,5 +1,5 @@
-﻿using Ordering.Core.Domain.Vo;
-using Shared.Domain.Exceptions;
+﻿using Shared.Domain.Exceptions;
+using Shared.Domain.Vo;
 
 namespace Ordering.Core.Domain
 {

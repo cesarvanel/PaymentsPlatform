@@ -1,7 +1,7 @@
 ﻿using Ordering.Core.Application.Commands.CheckoutOrder;
 using Ordering.Core.Domain;
-using Ordering.Core.Domain.Vo;
 using Ordering.Tests.Units.InMemory;
+using Shared.Domain.Vo;
 
 namespace Ordering.Tests.Units
 {

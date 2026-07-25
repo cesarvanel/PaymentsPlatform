@@ -1,4 +1,4 @@
-﻿using Ordering.Core.Domain.Vo;
+﻿using Shared.Domain.Vo;
 
 
 namespace Ordering.Core.Domain

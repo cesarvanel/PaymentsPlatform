@@ -1,5 +1,5 @@
 ﻿using Ordering.Core.Domain;
-using Ordering.Core.Domain.Vo;
+using Shared.Domain.Vo;
 
 namespace Ordering.Tests.Units.Builder
 {

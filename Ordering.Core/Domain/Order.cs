@@ -1,7 +1,7 @@
 ﻿using Ordering.Core.Domain.Events;
 using Ordering.Core.Domain.Exceptions;
-using Ordering.Core.Domain.Vo;
 using Shared.Domain;
+using Shared.Domain.Vo;
 
 namespace Ordering.Core.Domain
 {
@@ -79,6 +79,7 @@ namespace Ordering.Core.Domain
 
             _isValid = true;
             RaiseDomainEvent(new OrderCheckedOut(Id, Total.Amount));
+            RaiseDomainEvent(new OrderCreated(Id, Total.Amount));
 
         }
 
