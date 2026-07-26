@@ -4,7 +4,7 @@ using Shared.Domain.Vo;
 namespace Ordering.Core.Domain
 {
 
-    public readonly record struct ProductSnapshot(Guid Id, string Name, decimal Price);
+    public readonly record struct ProductSnapshot(Guid Id, string Name, decimal Price , Currency Currency);
 
     public class Product
     {
@@ -26,7 +26,7 @@ namespace Ordering.Core.Domain
 
         public static Product Create(Guid id , string name, Money price) => new (id, name, price);
 
-        public ProductSnapshot Snapshot => new(_id, _name, _price.Amount);
+        public ProductSnapshot Snapshot => new(_id, _name, _price.Amount, _price.Currency);
 
 
     }

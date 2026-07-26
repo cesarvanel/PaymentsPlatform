@@ -5,7 +5,6 @@ namespace Ordering.Core.Domain
 {
     public class OrderItem(Product product, Quantity quantity)
     {
-
         public Quantity Quantity { get; private set; } = quantity;
         public Product Product { get; } = product;
 

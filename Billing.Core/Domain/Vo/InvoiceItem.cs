@@ -2,8 +2,5 @@
 
 namespace Billing.Core.Domain.Vo
 {
-    public record InvoiceItem(Guid ProductId, string Name, Quantity Quantity, Money Price)
-    {
-
-    }
+    public record InvoiceItem(Guid ProductId, string Name, Quantity Quantity, Money Price);
 }

@@ -79,7 +79,7 @@ namespace Ordering.Core.Domain
 
             _isValid = true;
             RaiseDomainEvent(new OrderCheckedOut(Id, Total.Amount));
-            RaiseDomainEvent(new OrderCreated(Id, Total.Amount));
+            RaiseDomainEvent(new OrderCreated(Id, Total.Amount, Total.Currency, _items.Select(item => new OrderCreatedItem(item.Product.Snapshot.Id, item.Quantity.Value, item.Product.Snapshot.Price, item.Product.Snapshot.Currency))));
 
         }
 
