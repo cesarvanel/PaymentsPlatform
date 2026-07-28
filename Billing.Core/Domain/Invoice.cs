@@ -47,8 +47,10 @@ namespace Billing.Core.Domain
                                    .Aggregate(new Money(0, TotalAmount.Currency), (total, p) => total.Add(p.Amount));
         public Money RemainingAmount => TotalAmount.Subtract(PaidAmount);
 
+        public IReadOnlyList<Payment> GetAllPayments => _payments;
 
-        public void AddPayment(Money paidAmount, PaymentMethod method)
+
+        public Payment AddPayment(Money paidAmount, PaymentMethod method)
         {
             EnsureCanReceivePayment();
             EnsureSameCurrency(paidAmount);
@@ -57,8 +59,9 @@ namespace Billing.Core.Domain
             var payment = Payment.Create(Guid.NewGuid(), Id, paidAmount.Amount, paidAmount.Currency, method, DateTime.UtcNow);
 
             _payments.Add(payment);
-
             State = RecalculateState();
+
+            return payment;
         }
 
 

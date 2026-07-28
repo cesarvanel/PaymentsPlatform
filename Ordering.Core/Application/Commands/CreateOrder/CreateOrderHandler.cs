@@ -34,30 +34,18 @@ namespace Ordering.Core.Application.Commands.CreateOrder
                 {
                     order.AddOrderItem(orderItem);
                 }
-            }
-            catch (Exception ex)
-                when (ex is ProductNotFoundException || ex is QuantityValueException)
-            {
-                return Result<CreateOrderResponse>.Failure(ex.Message);
-            }
-
-
-            try
-            {
 
                 order.Validate();
-                await orderRepository.SaveAsync(order, ct);   
+                await orderRepository.SaveAsync(order, ct);
             }
-            catch (InvalidOrderException ex)
+            catch (DomainException ex)
             {
                 return Result<CreateOrderResponse>.Failure(ex.Message);
-
             }
 
             response.IsCreated = true;
             response.OrderId = order.Id;
             return Result<CreateOrderResponse>.Success(response);
-
         }
 
 

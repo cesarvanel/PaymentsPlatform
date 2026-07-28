@@ -57,8 +57,6 @@ namespace Shared.Test
 
             var result = await dispatcher.ExecuteAsync(new PingCommand("Connection"), TestContext.Current.CancellationToken);
 
-            Console.WriteLine(result);
-
             Assert.True(result.IsSuccess);
 
         }

@@ -34,7 +34,7 @@ namespace Ordering.Tests.Units
             Assert.True(result.IsSuccess);
             Assert.Equal(order.Id, result.Value);
             Assert.True(order.IsValid);
-            Assert.Single(order.DomainEvents);
+            Assert.Equal(2, order.DomainEvents.Count);
         }
 
 

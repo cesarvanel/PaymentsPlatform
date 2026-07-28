@@ -11,7 +11,6 @@ namespace Billing.Core.Application.Subscribers
     {
         public bool IsSubscribedTo(IDomainEvent e) => e is OrderPlacedIntegrationEvent;
 
-
         public async Task HandleAsync(IDomainEvent e, CancellationToken ct = default)
         {
             if (e is not OrderPlacedIntegrationEvent placed) return;
@@ -23,7 +22,6 @@ namespace Billing.Core.Application.Subscribers
             await InvoiceRepository.SaveAsync(invoice, ct);
 
         }
-
        
     }
 }
