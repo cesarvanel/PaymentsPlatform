@@ -11,5 +11,6 @@
     <Project Path="Shared.Test/Shared.Test.csproj" Id="122227bc-3160-4892-8dea-eb610cb2e576" />
     <Project Path="Shared/Shared.csproj" />
   </Folder>
+  <Project Path="Contracts/Contracts.csproj" Id="ca068ca1-6660-468d-95b9-ce671e6d07da" />
   <Project Path="PaymentsPlatform/PaymentsPlatform.csproj" />
 </Solution>

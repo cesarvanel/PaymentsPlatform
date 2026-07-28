@@ -18,8 +18,8 @@ namespace Ordering.Core.Application.Subscribers
                 (
                 OrderId: created.OrderId,
                 Amount: created.TotalAmount,
-                Currency: created.Currency.ToString(),
-                Items: [..created.Items.Select(item => new OrderPlacedItem(item.ProductId, item.Name, item.Quantity, item.UnitPrice, item.Currency.ToString()))]);
+                Currency: created.Currency,
+                Items: [..created.Items.Select(item => new OrderPlacedItem(item.ProductId, item.Name, item.Quantity, item.UnitPrice, item.Currency))]);
 
                await outbox.AddAsync([integrationEvent], ct);
         }

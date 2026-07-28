@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace Shared.Application.Messaging
 {
     public interface IAppLogger<T>
