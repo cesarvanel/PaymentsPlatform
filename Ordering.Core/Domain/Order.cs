@@ -64,7 +64,7 @@ namespace Ordering.Core.Domain
             {
                 var total = new Money(0m, Currency.Xaf);
                 foreach (var item in _items) total = total.Add(item.TotalAmount);
-                if (total.Amount > DiscountThreshold) total = total.WithDiscount(DiscountRate);
+                if (total.Value > DiscountThreshold) total = total.WithDiscount(DiscountRate);
                 return total;
             }
         }
@@ -78,15 +78,14 @@ namespace Ordering.Core.Domain
             }
 
             _isValid = true;
-            RaiseDomainEvent(new OrderCheckedOut(Id, Total.Amount));
-            RaiseDomainEvent(new OrderCreated(Id, Total.Amount, Total.Currency, _items.Select(item => new OrderCreatedItem(item.Product.Snapshot.Id, item.Product.Snapshot.Name, item.Quantity.Value, item.Product.Snapshot.Price, item.Product.Snapshot.Currency))));
+            RaiseDomainEvent(new OrderCreated(Id, Total.Value, Total.Currency, _items.Select(item => new OrderCreatedItem(item.Product.Snapshot.Id, item.Product.Snapshot.Name, item.Quantity.Value, item.Product.Snapshot.Price, item.Product.Snapshot.Currency))));
 
         }
 
 
         public IEnumerable<OrderItem> ItemsAboveLing(decimal minLineTotal)
         {
-            return Items.Where(item => item.TotalAmount.Amount > minLineTotal);
+            return Items.Where(item => item.TotalAmount.Value > minLineTotal);
         }
 
         private void EnsureIsNotValid()

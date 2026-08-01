@@ -1,8 +1,5 @@
 ﻿using Shared.Application.Cqrs.interfaces;
 using Shared.Domain.Event;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Shared.Test.InMemory
 {
@@ -14,5 +11,7 @@ namespace Shared.Test.InMemory
             Events.AddRange(events);
             return Task.CompletedTask;
         }
+
+        public List<IIntegrationEvent> PendingEvents() => Events;
     }
 }

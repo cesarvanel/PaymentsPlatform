@@ -21,14 +21,15 @@ namespace Billing.Core.Domain
             List<InvoiceItem> invoicesItems,
             decimal totalAmount,
             Currency currency,
-            List<Payment>? payments)
+            List<Payment> payments,
+            InvoiceState state)
         {
             Id = id;
             OrderId = orderId;
             InvoiceItems = invoicesItems;
             TotalAmount = new Money(totalAmount, currency);
-            _payments = payments ?? [];
-            State = InvoiceState.Issued;
+            _payments = payments;
+            State = state;
         }
 
 
@@ -39,7 +40,7 @@ namespace Billing.Core.Domain
             decimal totalAmount,
             Currency currency)
         {
-            return new Invoice(id, orderId, invoicesItems, totalAmount, currency, null);
+            return new Invoice(id, orderId, invoicesItems, totalAmount, currency, [], InvoiceState.Issued);
         }
 
         public Money PaidAmount => _payments
@@ -54,14 +55,15 @@ namespace Billing.Core.Domain
         {
             EnsureCanReceivePayment();
             EnsureSameCurrency(paidAmount);
-            if (paidAmount.Amount > RemainingAmount.Amount) throw new PaymentExceedsRemainingException();
+            if (paidAmount.Value > RemainingAmount.Value) throw new PaymentExceedsRemainingException();
 
-            var payment = Payment.Create(Guid.NewGuid(), Id, paidAmount.Amount, paidAmount.Currency, method, DateTime.UtcNow);
+            var payment = Payment.Create(Guid.NewGuid(), Id, paidAmount.Value, paidAmount.Currency, method, DateTime.UtcNow);
 
             _payments.Add(payment);
             State = RecalculateState();
 
             return payment;
+
         }
 
 
@@ -77,9 +79,9 @@ namespace Billing.Core.Domain
 
         private InvoiceState RecalculateState()
         {
-            if (PaidAmount.Amount == 0) return InvoiceState.Issued; 
-            if (RemainingAmount.Amount > 0) return InvoiceState.PartiallyPaid; 
-            return InvoiceState.Paid;            
+            if (PaidAmount.Value == 0.0m) return InvoiceState.Issued;
+            if (RemainingAmount.Value > 0.0m) return InvoiceState.PartiallyPaid;
+            return InvoiceState.Paid;
         }
         private void EnsureCanReceivePayment()
         {
@@ -102,6 +104,20 @@ namespace Billing.Core.Domain
             }
         }
 
-     
+        public static Invoice Reconstitue(
+            Guid id,
+            Guid orderId,
+            List<InvoiceItem> invoicesItems,
+            decimal totalAmount,
+            Currency currency,
+            List<Payment> payments,
+            InvoiceState state
+            )
+
+        {
+            return new(id, orderId, invoicesItems, totalAmount, currency, payments, state);
+        }
+
+
     }
 }

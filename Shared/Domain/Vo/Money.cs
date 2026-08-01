@@ -5,34 +5,34 @@ namespace Shared.Domain.Vo
 {
     public class Money
     {
-        public decimal Amount { get; }
+        public decimal Value { get; }
 
         public Currency Currency { get; }
 
-
+            
         public Money(decimal amount, Currency currency)
         {
 
             if (amount < 0) throw new NegativeAmountException();
-            Amount = amount;
+            Value = amount;
             Currency = currency;
         }
 
         public Money Add(Money other)
         {
             EnsureSameCurrency(other);
-            return new Money(Amount + other.Amount, Currency);
+            return new Money(Value + other.Value, Currency);
         }
 
         public Money Subtract(Money other)
         {
             EnsureSameCurrency(other);
-            return new Money(Amount - other.Amount, Currency);
+            return new Money(Value - other.Value, Currency);
         }
 
         public Money WithDiscount(decimal rate)
         {
-            decimal discountAmount = Amount - (Amount * rate);
+            decimal discountAmount = Value - (Value * rate);
             return new Money(discountAmount, Currency);
         }
 

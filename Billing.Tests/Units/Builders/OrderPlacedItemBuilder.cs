@@ -48,7 +48,7 @@ namespace Billing.Tests.Units.Builders
         public List<OrderPlacedItem> BuildMany(int number)
         {
             List<OrderPlacedItem> orderPlacedItems = [];
-            for (int i =0; i <= number ; i++)
+            for (int i =1; i <= number ; i++)
             {
                 var builder = new OrderPlacedItemBuilder();
                 builder.WithProductId(Guid.NewGuid());

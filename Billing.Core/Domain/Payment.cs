@@ -16,19 +16,19 @@ namespace Billing.Core.Domain
         public PaymentStatus Status { get; private set; }
 
 
-        private Payment(Guid id, Guid invoiceId,decimal amount, Currency currency, PaymentMethod method, DateTime paidAt)
+        private Payment(Guid id, Guid invoiceId, PaymentStatus status, decimal amount, Currency currency, PaymentMethod method, DateTime paidAt)
         {
             Amount = new Money(amount, currency);
             Method = method;
             PaidAt = paidAt;
             Id = id;
             InvoiceId = invoiceId;
-            Status = PaymentStatus.Active;
+            Status = status;
         }
 
         public static Payment Create(Guid id, Guid invoiceId, decimal amount, Currency currency, PaymentMethod method, DateTime paidAt)
         {
-            return new Payment(id,invoiceId, amount, currency, method, paidAt);
+            return new Payment(id, invoiceId, PaymentStatus.Active, amount, currency, method, paidAt);
         }
 
 
@@ -38,5 +38,14 @@ namespace Billing.Core.Domain
                 throw new PaymentAlreadyCancelledException();
             Status = PaymentStatus.Cancelled;
         }
+
+        public static Payment Reconstitue(
+            Guid id,
+            Guid invoiceId,
+            PaymentStatus status,
+            decimal amount,
+            Currency currency,
+            PaymentMethod method,
+            DateTime paidAt) => new(id, invoiceId, status, amount, currency, method, paidAt);
     }
 }

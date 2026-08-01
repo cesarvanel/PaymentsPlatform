@@ -26,7 +26,7 @@ namespace Ordering.Core.Domain
 
         public static Product Create(Guid id , string name, Money price) => new (id, name, price);
 
-        public ProductSnapshot Snapshot => new(_id, _name, _price.Amount, _price.Currency);
+        public ProductSnapshot Snapshot => new(_id, _name, _price.Value, _price.Currency);
 
 
     }

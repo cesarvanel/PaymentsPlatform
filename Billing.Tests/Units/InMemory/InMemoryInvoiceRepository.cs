@@ -1,5 +1,6 @@
 ﻿using Billing.Core.Application.Ports.Out;
 using Billing.Core.Domain;
+using Billing.Core.Domain.Enum;
 
 namespace Billing.Tests.Units.InMemory
 {
@@ -30,6 +31,15 @@ namespace Billing.Tests.Units.InMemory
             var invoice = Invoice.Create(invoiceId, Guid.NewGuid(), [], 1000.00m, Shared.Domain.Vo.Currency.Xaf);
 
             SaveAsync(invoice, default);
+        }
+
+        public void SeedWithPayment(Guid invoiceId, List<Payment> payments)
+        {
+            var totalAnmount = payments.Aggregate(0.0m, (total, payment) => total += payment.Amount.Value);
+            var invoice = Invoice.Reconstitue(invoiceId, Guid.NewGuid(), [], totalAnmount, Shared.Domain.Vo.Currency.Xaf, payments,InvoiceState.Paid);
+
+            SaveAsync(invoice, default);
+
         }
     }
 }

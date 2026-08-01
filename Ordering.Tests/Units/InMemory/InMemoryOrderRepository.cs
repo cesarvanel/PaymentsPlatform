@@ -24,5 +24,7 @@ namespace Ordering.Tests.Units.InMemory
         {
             _store[order.Id] = order;
         }
+
+        public List<Order> GetAll() => _store.Values.ToList();
     }
 }
