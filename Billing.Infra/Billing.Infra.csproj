@@ -8,7 +8,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" />
-		<PackageReference Include="Microting.EntityFrameworkCore.MySql" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" />
 	</ItemGroup>
 
