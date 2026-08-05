@@ -1,4 +1,5 @@
 ﻿using Billing.Core.Application.Commands.MakePayment;
+using Billing.Core.Domain.Enum;
 using Billing.Tests.Units.Builders;
 using Billing.Tests.Units.InMemory;
 
@@ -22,12 +23,17 @@ namespace Billing.Tests.Units.Usecases
         public async Task MakePayment_Successfully()
         {
             var invoiceId = Guid.NewGuid();
-            _invoiceRepository.Initialize(invoiceId);
+            _invoiceRepository.Initialize(invoiceId, 250_000.00m);
             var command = new MakePaymentCommandBuilder().WithInvoiceId(invoiceId).Build();
             var result = await _handler.HandleAsync(command, TestContext.Current.CancellationToken);
 
-            Assert.True(result.IsSuccess);
+            var invoice = Assert.Single(_invoiceRepository.GetAll());
 
+
+            Assert.True(result.IsSuccess);
+            Assert.Single(invoice.Payments);
+            Assert.Equal(invoice.PaidAmount.Value, command.Amount);
+            Assert.Equal(InvoiceState.PartiallyPaid, invoice.State);
         }
 
         [Fact]

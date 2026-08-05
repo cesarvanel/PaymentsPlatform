@@ -26,9 +26,9 @@ namespace Billing.Tests.Units.InMemory
             return Task.CompletedTask;
         }
 
-        public void Initialize(Guid invoiceId)
+        public void Initialize(Guid invoiceId, decimal amount = 1000.00m)
         {
-            var invoice = Invoice.Create(invoiceId, Guid.NewGuid(), [], 1000.00m, Shared.Domain.Vo.Currency.Xaf);
+            var invoice = Invoice.Create(invoiceId, Guid.NewGuid(), [], amount, Shared.Domain.Vo.Currency.Xaf);
 
             SaveAsync(invoice, default);
         }

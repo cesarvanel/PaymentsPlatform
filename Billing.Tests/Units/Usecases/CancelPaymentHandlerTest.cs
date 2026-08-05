@@ -29,8 +29,8 @@ namespace Billing.Tests.Units.Usecases
 
             var payments = new List<Payment>
             {
-                Payment.Create(paymentOneId, command.InvoiceId, 15000.00m, Currency.Xaf, PaymentMethod.Cash, DateTime.Now),
-                Payment.Create(paymentTwoId, command.InvoiceId, 20000.00m, Currency.Xaf, PaymentMethod.BankTransfer, DateTime.Now),
+                Payment.Create(paymentOneId, command.InvoiceId, 15000.00m, Currency.Xaf, PaymentMethod.Cash, DateTime.UtcNow),
+                Payment.Create(paymentTwoId, command.InvoiceId, 20000.00m, Currency.Xaf, PaymentMethod.BankTransfer, DateTime.UtcNow),
             };
           
             _invoiceRepository.SeedWithPayment(command.InvoiceId, payments);
@@ -41,13 +41,9 @@ namespace Billing.Tests.Units.Usecases
 
 
             Assert.True(result.IsSuccess, result.Error);
-
             Assert.Equal(InvoiceState.PartiallyPaid, invoice.State);
-
-            Assert.Equal(PaymentStatus.Cancelled, invoice.GetAllPayments[0].Status);
-
+            Assert.Equal(PaymentStatus.Cancelled, invoice.Payments[0].Status);
             Assert.Equal(20_000.00m, invoice.PaidAmount.Value);
-
             Assert.Equal(15_000.00m, invoice.RemainingAmount.Value);
 
 

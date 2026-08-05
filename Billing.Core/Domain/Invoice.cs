@@ -48,7 +48,7 @@ namespace Billing.Core.Domain
                                    .Aggregate(new Money(0, TotalAmount.Currency), (total, p) => total.Add(p.Amount));
         public Money RemainingAmount => TotalAmount.Subtract(PaidAmount);
 
-        public IReadOnlyList<Payment> GetAllPayments => _payments;
+        public IReadOnlyList<Payment> Payments => _payments;
 
 
         public Payment AddPayment(Money paidAmount, PaymentMethod method)

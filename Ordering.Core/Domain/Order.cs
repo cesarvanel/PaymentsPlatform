@@ -1,5 +1,6 @@
 ﻿using Ordering.Core.Domain.Events;
 using Ordering.Core.Domain.Exceptions;
+using Ordering.Core.Domain.Snapshot;
 using Shared.Domain;
 using Shared.Domain.Vo;
 
@@ -56,6 +57,20 @@ namespace Ordering.Core.Domain
 
             }
 
+        }
+
+        public OrderSnapshot ToSnapshot()
+        {
+            var items = _items
+                .Select(item => new OrderItemSnapshot(
+                    item.Product.Snapshot.Id,
+                    item.Product.Snapshot.Name,
+                    item.Product.Snapshot.Price,
+                    item.Product.Snapshot.Currency,
+                    item.Quantity.Value))
+                .ToList();
+
+            return new OrderSnapshot(Id, _isValid, items);
         }
 
         public Money Total
