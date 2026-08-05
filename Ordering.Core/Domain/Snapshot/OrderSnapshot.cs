@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Shared.Domain.Vo;
 
 namespace Ordering.Core.Domain.Snapshot
 {
-    internal class OrderSnapshot
-    {
-    }
+    public record OrderSnapshot(
+    Guid Id,
+    bool IsValid,
+    IReadOnlyList<OrderItemSnapshot> Items);
+
+    public record OrderItemSnapshot(
+    Guid ProductId,
+    string ProductName,
+    decimal ProductPrice,
+    Currency Currency,
+    int Quantity);
 }
