@@ -25,10 +25,8 @@ namespace Ordering.Infra.Persistence.Models
 
         }
 
-        public static OrderModel ToPersistence(Order order)
+        public static OrderModel ToPersistence(OrderSnapshot snapshot)
         {
-            var snapshot = order.ToSnapshot();
-
             return new OrderModel
             {
                 Id = snapshot.Id,

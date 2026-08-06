@@ -1,5 +1,6 @@
 ﻿using Billing.Core.Domain.Enum;
 using Billing.Core.Domain.Exceptions;
+using Billing.Core.Domain.Snapshot;
 using Billing.Core.Domain.Vo;
 using Shared.Domain.Exceptions;
 using Shared.Domain.Vo;
@@ -50,6 +51,7 @@ namespace Billing.Core.Domain
 
         public IReadOnlyList<Payment> Payments => _payments;
 
+     
 
         public Payment AddPayment(Money paidAmount, PaymentMethod method)
         {
@@ -65,6 +67,30 @@ namespace Billing.Core.Domain
             return payment;
 
         }
+
+
+        public InvoiceSnapshot ToSnapshot()
+        {
+            var invoiceItemsSnapshot = InvoiceItems.Select(item =>
+            new InvoiceItemSnapshot(
+                                    Amount: item.Price.Value,
+                                    Currency: item.Price.Currency,
+                                    ProductId: item.ProductId,
+                                    ProductName: item.Name,
+                                    item.Quantity.Value)).ToList();
+
+            var paymentsSnapshot = _payments.Select(p => p.ToSnapShot()).ToList();
+
+            return new InvoiceSnapshot(
+                 Id,
+                 OrderId,
+                 TotalAmount.Value,
+                 TotalAmount.Currency,
+                 State,
+                 invoiceItemsSnapshot,
+                 paymentsSnapshot);
+        }
+
 
 
         public void CancelPayment(Guid paymentId)
@@ -121,3 +147,7 @@ namespace Billing.Core.Domain
 
     }
 }
+
+
+
+

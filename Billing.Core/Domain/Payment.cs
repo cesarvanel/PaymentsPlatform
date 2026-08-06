@@ -1,5 +1,6 @@
 ﻿using Billing.Core.Domain.Enum;
 using Billing.Core.Domain.Exceptions;
+using Billing.Core.Domain.Snapshot;
 using Shared.Domain.Vo;
 
 namespace Billing.Core.Domain
@@ -29,6 +30,18 @@ namespace Billing.Core.Domain
         public static Payment Create(Guid id, Guid invoiceId, decimal amount, Currency currency, PaymentMethod method, DateTime paidAt)
         {
             return new Payment(id, invoiceId, PaymentStatus.Active, amount, currency, method, paidAt);
+        }
+
+        public PaymentSnapshot ToSnapShot()
+        {
+            return new PaymentSnapshot(
+                Id, 
+                InvoiceId,
+                Amount.Value,
+                Amount.Currency,
+                Status,
+                Method,
+                PaidAt);
         }
 
 

@@ -34,6 +34,7 @@ namespace Billing.Infra.Persistence.Configurations
                 items.Property(x => x.ProductId);
                 items.Property(x => x.ProductName);
                 items.Property(x => x.ProductPrice).HasPrecision(18, 2);
+                items.Property(x => x.Currency).HasConversion<string>();
             });
 
             builder.HasMany(i => i.Payments)
